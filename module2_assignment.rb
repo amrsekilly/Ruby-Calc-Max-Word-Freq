@@ -86,7 +86,7 @@ class Solution
     end
   end
 
-  binding.pry
+  # binding.pry
 
   # Implement the calculate_line_with_highest_frequency() method to:
   #* calculate the maximum value for highest_wf_count contained by the LineAnalyzer objects in analyzers array
@@ -94,6 +94,20 @@ class Solution
   #* identifies the LineAnalyzer objects in the analyzers array that have highest_wf_count equal to highest_count_across_lines 
   #  attribute value determined previously and stores them in highest_count_words_across_lines.
 
+  def calculate_line_with_highest_frequency()
+    heighest_count_line = analyzers.sort_by{ |analyzer| analyzer.highest_wf_count }.reverse.first
+    @highest_count_across_lines = heighest_count_line.highest_wf_count
+    @highest_count_words_across_lines = analyzers.select {|analyzer| analyzer.highest_wf_count == @highest_count_across_lines}
+  end
+
+  # binding.pry
+
   #Implement the print_highest_word_frequency_across_lines() method to
   #* print the values of objects in highest_count_words_across_lines in the specified format
+  def print_highest_word_frequency_across_lines()
+    puts 'The following words have the highest word frequency per line:'
+    @highest_count_words_across_lines.each do |analyzer| 
+      puts "#{analyzer.highest_wf_words} (appears in line #{analyzer.line_number})"
+    end
+  end
 end
